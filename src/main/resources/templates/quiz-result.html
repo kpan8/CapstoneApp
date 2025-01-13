@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="/css/resultstyle.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="result-box">
+        <h1>Quiz Result</h1>
+        <p>Your score: <span th:text="${score}"></span> / 5</p>
+        <a href="/quizzes">Back to Quiz List</a>
+        <a href="/">Home</a>
+    </div>
+</div>
+</body>
+</html>

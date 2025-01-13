@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Quiz Detail</title>
+    <style>
+        :root {
+            --accent-color: #3ca89f;
+            --text-color: black;
+            --input-color: #F3F0FF;
+            --box-bg-color: rgba(255, 255, 255, 0.9);
+            --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: 'Noto Serif', serif, Arial, Helvetica, serif;
+            font-size: 12pt;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Noto Serif', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #c3fafa;
+            background-size: cover;
+            background-position: center;
+            overflow: auto;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 444;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .quiz-container {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .question-box {
+            background-color: var(--box-bg-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid #ddd;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .question-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question-image {
+            width: 250px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .answers {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 14px 28px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(37, 213, 198);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            .quiz-image, .question-image {
+                width: 200px;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Quiz: <span th:text="${quiz.getName()}">Quiz Name</span></h1>
+
+<h2>Which word best describes the image?</h2>
+<form th:action="@{/quiz/{id}/submit(id=${quiz.id})}" method="post">
+    <div th:each="question, iterStat : ${quiz.getQuestions()}">
+        <!-- Wrap each question in a 'question-box' -->
+        <div class="question-box">
+            <h3 th:text="${iterStat.index + 1}">Question Number</h3>
+            <!-- Question Image -->
+            <img th:src="@{/{image}(image=${question.getImagePath()})}" alt="Question Image" class="question-image"/>
+
+
+            <!-- Answers for each question -->
+            <div class="answers" th:each="answer : ${answers}">
+                <div th:if="${answer.getQuestion().id == question.id}">
+                    <label>
+                        <input type="radio" th:name="'answers[' + ${question.getId()} + ']'"
+                               th:value="${answer.getAnswer()}" />
+                        <span th:text="${answer.getAnswer()}">Answer Option</span>
+                    </label>
+                    <br />
+                </div>
+            </div>
+            <button class="next-btn" type="button">Next</button>
+
+        </div>
+        <hr />
+    </div>
+
+    <button type="submit">Submit Quiz</button>
+</form>
+<script type="text/javascript" src="/js/quiz.js" defer></script>
+
+</body>
+</html>

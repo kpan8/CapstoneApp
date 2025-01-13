@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /*.secular-one-regular*/ /*{*/
+    font-family: 'Noto Serif', serif, Arial, Helvetica, serif;
+    font-weight: 400;
+    font-style: normal;
+    /*background-image: url('../images/background.jpg');*/
+    background-color: #c3fafa;
+    background-size: cover;
+    padding-bottom: 4em;
+    /* }*/
+
+
+}
+
+.main { /*This is what the main container will look like etc...*/
+    padding: 1.5em;
+    /*background-image: url('background.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;*/
+    position: relative;
+    overflow: hidden;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    font-size: 2em;
+    color: black;
+    cursor: pointer;
+}
+
+.links-div {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: left 0.3s ease-in-out;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.links-div.active {
+    left: 0;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 1em;
+    list-style: none;
+}
+
+.links li {
+    margin-bottom: 1.5em;
+    position: relative;
+}
+
+.links li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    display: block;
+}
+
+.links li a:hover {
+    color: #1e90ff;
+}
+
+/* Dropdown menu is here of course*/
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 100;
+    list-style: none;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #333;
+    color: white;
+}
+
+/* Show the dropdown when you hover */
+.links li:hover .dropdown-menu {
+    display: block;
+}
+
+.signup ul {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+    list-style: none;
+}
+
+.signup li a {
+    padding: 0.35em 0.85em;
+    border: 1px solid #333;
+    border-radius: 6px;
+    transition: 300ms;
+}
+
+.signup li a:hover {
+    background-color: #333;
+    color: white;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding-top: 2em;
+}
+
+.center h1 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+}
+
+.center p {
+    font-size: 1.1em;
+    margin-bottom: 2em;
+    max-width: 700px;
+
+}
+
+.quiz-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 1em;
+}
+
+.quiz-table {
+    width: 100%;
+    max-width: 800px;
+    overflow-x: auto;
+    margin-top: 1em;
+}
+
+.quiz-table table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-table th, .quiz-table td {
+    border: 1px solid #ddd;
+    padding: 0.75em;
+    word-wrap: break-word;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quiz-table th {
+    background-color: #333;
+    color: white;
+}
+
+.quiz-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.quiz-table a {
+    color: #1e90ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.quiz-table a:hover {
+    text-decoration: underline;
+}
+
+.category-image {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        font-size: 1.5em;
+    }
+
+    .links {
+        font-size: 1em;
+    }
+
+    .center h1 {
+        font-size: 2em;
+    }
+
+    .center p {
+        font-size: 1em;
+    }
+
+    .quiz-table th, .quiz-table td {
+        padding: 0.5em;
+        font-size: 0.9em;
+    }
+
+    .quiz-container {
+        padding: 0 0.5em;
+    }
+
+
+    .dropdown-menu {
+        width: 100%; /* fit the container */
+    }
+    .main {
+        margin-bottom: 3em;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .center h1 {
+        font-size: 1.5em;
+    }
+
+    .center p {
+        font-size: 0.9em;
+    }
+
+    .quiz-table {
+        max-width: 100%;
+    }
+
+    .quiz-table th, .quiz-table td {
+        padding: 0.5em;
+        font-size: 0.8em;
+    }
+
+
+    .dropdown-menu {
+        width: 100%; /* Full width */
+    }
+
+    .main {
+        margin-bottom: 4em;
+    }
+}

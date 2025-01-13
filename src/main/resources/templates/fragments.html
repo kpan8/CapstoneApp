@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragments</title>
+    <link rel="stylesheet" href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Fragment for the Navbar -->
+<div th:fragment="navbar">
+    <main class="main"><!--This is the main content of the page -->
+        <div class="top"> <!--Top section of the page-->
+            <div class="nav">
+                <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
+                <div class="links-div">
+                    <ul class="links">
+                        <li><a href="/">Home</a></li>
+                        <li class="dropdown">
+                            <a href="/quizzes">Quizzes</a>
+
+                        </li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="signup">
+                <ul>
+                    <!-- Show 'Log out' when authenticated -->
+                   <!-- <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">Log out</a>
+                    </li>-->
+                    <!-- Show 'Log in' and 'Sign up' when not authenticated -->
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login">Log in</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/signup">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+
+<script type="text/javascript" src="/js/script.js" defer></script>
+
+</html>

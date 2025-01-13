@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Quizzes List</title>
+    <style>
+        :root {
+            --accent-color: #3ca89f;
+            --text-color: black;
+            --input-color: #F3F0FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: 'Noto Serif', serif, Arial, Helvetica, serif;
+            font-size: 12pt;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Noto Serif', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #c3fafa;
+
+            /*background-image: url(../images/background.jpg);*/
+            background-size: cover;
+            background-position: left;
+            overflow: auto;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            min-height: 100vh;
+            width: max(60%, 900px);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Let content expand naturally */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .quiz-image {
+            margin-top: 15px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .quiz-level {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .start-quiz-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .start-quiz-link:hover {
+            background-color: rgb(37, 213, 198);
+        }
+
+        /* No quizzes available message */
+        .no-quizzes {
+            color: #e70b25;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .quiz-container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .quiz-name {
+                font-size: 1.2rem;
+            }
+
+            .quiz-level {
+                font-size: 1rem;
+            }
+
+            .start-quiz-link {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>All Available Quizzes</h1>
+
+    <!-- Show this if no quizzes are available -->
+    <div th:if="${#lists.isEmpty(quizzes)}" class="no-quizzes">
+        <p>No quizzes available at the moment.</p>
+    </div>
+
+    <!-- Show the quizzes if there are quizzes -->
+    <div th:if="${not #lists.isEmpty(quizzes)}">
+        <div th:each="quiz : ${quizzes}" class="quiz-container">
+            <div class="quiz-name" th:text="${quiz.getName()}">Quiz Name</div>
+            <img th:src="@{${quiz.getImagePath()}}" alt="Quiz Image" class="quiz-image"/>
+
+            <div class="quiz-level" th:text="'Level: ' + ${quiz.getLevel()}">Level</div>
+            <a th:href="@{/quiz/{id}(id=${quiz.id})}" class="start-quiz-link">Start Quiz</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
